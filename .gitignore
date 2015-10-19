@@ -1,1 +1,6 @@
+# server side
 node_modules
+
+# public
+public/stylesheets/style.sass
+public/stylesheets/style.css.map
