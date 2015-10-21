@@ -1,0 +1,100 @@
+body {
+  background: #E1F2FB;
+  font-family: Nunito;
+  font-weight: 300;
+  font-size: 2rem;
+  color: #FFF;
+}
+
+.csv-upload {
+  &-action-button {
+    cursor: pointer;
+    padding: 3%;
+    background: $blue41;
+    border-radius: 0 0 8px 8px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: all 0.3s ease 0s;
+    
+    &:hover {background: $blue57;}
+  }
+  
+  &-container {
+    @include display-flex;
+    @include align-items(center);
+    @include justify-content(center);
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+  
+  &-form {
+    padding: 3%;
+    background: #FFF;
+
+    & .success-note {
+      color: $blue57;
+      font-weight: 500;
+      text-align: center;
+      text-transform: uppercase;
+    }
+    
+    & textarea {
+      font-size: 2rem;
+      color: $blue25;
+      
+      &::-webkit-input-placeholder {
+        color: $blue57;
+        text-align: center;
+      }
+    }
+  }
+  
+  &-row {width: 100%;}
+  
+  &-step {
+    @include display-flex;
+    @include flex-flow(column nowrap);
+    text-align: center;
+    text-transform: uppercase;
+    
+    & .glyphicon {
+      padding-bottom: 10%;
+      font-size: 3rem;
+    }
+    
+    &.active {
+      transition: all 0.3s ease 0s;
+      &:hover {
+        color: lightblue;
+        cursor: pointer;
+      }
+    }
+
+    &.inactive {opacity: 0.3;}
+    
+    // container for each step class
+    &s {
+      @include display-flex;
+      @include justify-content(space-around);
+      padding: 1.5% 0;
+      background: $blue41;
+    }
+  }
+  
+  &-textarea {
+    resize: none;
+    width: 100%;
+    background: #FFF;
+    border: 0;
+    box-sizing: border-box;
+  }
+  
+  &-title {
+    padding: 3%;
+    background: $blue25;
+    border-radius: 8px 8px 0 0;
+    text-align: center;
+    text-transform: uppercase;
+  }
+}

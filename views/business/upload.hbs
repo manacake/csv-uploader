@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{pageTitle}}</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src="/javascripts/business.js"></script>
+  </head>
+  <body>
+
+    <div class="container-fluid csv-upload-container">
+      <div class="row csv-upload-row">
+        <div class="col-xs-12
+                    col-sm-10 col-sm-offset-1
+                    col-md-8 col-md-offset-2">
+
+          <div class="csv-upload-title">{{pageTitle}}</div>
+
+          <div class="csv-upload-steps">
+            <div class="csv-upload-step paste">
+              <span class="glyphicon glyphicon-paste"></span>
+              <span>Paste</span>
+            </div>
+            <div class="csv-upload-step review 
+              {{#unless showUploadPage}}inactive{{/unless}}">
+              <span class="glyphicon glyphicon-pencil"></span>
+              <span>Review</span>
+            </div>
+            <div class="csv-upload-step upload 
+              {{#unless showUploadPage}}inactive{{/unless}}">
+              <span class="glyphicon glyphicon-cloud-upload"></span>
+              <span>Upload</span>
+            </div>
+          </div>
+
+          {{#if showUploadPage}}
+            <div id="csv-upload-form-uploaded" class="csv-upload-form">
+              <p class="success-note">{{uploadStatus}}</p>
+            </div>
+
+            <div class="csv-upload-action-button"
+              onclick="location.href='/business/{{businessID}}/upload'"
+            >Upload More</div>
+          {{else}}
+            <!-- CSV paste section -->
+            <form id="csv-upload-form" class="csv-upload-form">
+              <textarea class="csv-upload-textarea" 
+                rows="20" 
+                placeholder="Paste your contacts in me! :]"
+              ></textarea>
+            </form>
+
+            <!-- CSV review section -->
+            <div id="csv-upload-form-review" class="csv-upload-form hidden">
+            </div>
+
+            <form id="csv-upload-form-review-post" 
+              action="/business/{{businessID}}/upload" 
+              method="POST"
+            ></form>
+
+            <!-- Action buttons -->
+            <div class="csv-upload-action-button paste" 
+              onclick="parsePastedCSV();"
+            >Review</div>
+            <div class="csv-upload-action-button review hidden" 
+              onclick="startUpload();"
+            >Upload</div>
+            <div class="csv-upload-action-button upload hidden">Processing</div>
+          {{/if}}
+
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
