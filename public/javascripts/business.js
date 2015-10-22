@@ -1,3 +1,4 @@
+// Parses raw pasted CSV and displays the stats on the review page.
 function parsePastedCSV () {
   // Used to construct our post data
   var contactObj;
@@ -23,7 +24,7 @@ function parsePastedCSV () {
   var delimitedData = convertTabsIntoCommas(rawCSV);
 
   // Grab the supposed "header"
-  if (delimitedData.length) {
+  if (delimitedData.length && delimitedData[0]) {
     possibleHeader = delimitedData[0];
   }
   /*
@@ -34,6 +35,7 @@ function parsePastedCSV () {
   hasHeader = possibleHeader.indexOf('name') >= 0 || 
               possibleHeader.indexOf('email') >= 0;
 
+  // TODO: Factor out the contact bundling
   if (hasHeader) {
     // TODO: Use a better logging system (winston maybe?)
     console.log('parsePastedCSV: This CSV apparently has a header!');
@@ -241,5 +243,12 @@ function convertTabsIntoCommas(pastedData) {
     var delimitedRow = rows[i].replace(regex, ',');
     delimitedData.push(delimitedRow);
   }
-  return delimitedData;
+
+  // Oh regex likes to insert empty strings which JS will count towards array length
+  if (delimitedData[0]) {
+    return delimitedData;
+  }
+  else {
+    return [];
+  }
 }
